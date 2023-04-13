@@ -1,4 +1,4 @@
-### stats girl bot
+## stats girl bot
 just a small bot meant for friends 
 because they are stupid
 and don't know how to be good at life
