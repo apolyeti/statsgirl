@@ -10,6 +10,12 @@ all good though
 - sqlite3
 - discord.js-commando
 
+# sad
+typescript sucks \n
+don't ever use it \n
+please don't \n
+i'm begging you \n
+
 
 ```bash
 rm -rf statsgirl
