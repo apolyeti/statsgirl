@@ -11,10 +11,10 @@ all good though
 - discord.js-commando
 
 # sad
-typescript sucks \n
-don't ever use it \n
-please don't \n
-i'm begging you \n
+typescript sucks
+don't ever use it
+please don't
+i'm begging you
 
 
 ```bash
