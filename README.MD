@@ -14,7 +14,7 @@ all good though
 
 ## a true upgrade from banobot
 - [x] actually works
-- [x] actually organized
+- [x] actually organized (sort of)
 - [x] actually good (not really though)
 - [x] actually has and makes use of a database
 - [x] actually has a good command handler
