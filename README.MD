@@ -16,7 +16,7 @@ all good though
 - [x] actually works
 - [x] actually organized
 - [x] actually good (not really though)
-- [] actually has and makes use of a database
+- [x] actually has and makes use of a database
 - [x] actually has a good command handler
 - [x] actually has a good event handler
 
