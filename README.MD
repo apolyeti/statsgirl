@@ -19,6 +19,14 @@ please don't
 i'm begging you
 
 
+## a true upgrade from banobot
+- [x] actually works
+- [x] actually organized
+- [x] actually good (not really though)
+- [x] actually has and makes use of a database
+- [x] actually has a good command handler
+- [x] actually has a good event handler
+
 ```bash
 rm -rf statsgirl
 ```
