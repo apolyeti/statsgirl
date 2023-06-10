@@ -22,7 +22,7 @@ module.exports = {
         });
 
         const player = createAudioPlayer();
-        const resource = createAudioResource("/Users/arveenazhand/Documents/repos/statsgirl/util/hovhannes.mp3");
+        const resource = createAudioResource(process.env.HOVHANNES_PATH);
 
         player.play(resource);
         connection.subscribe(player);
