@@ -1,4 +1,5 @@
-## stats girl bot
+# stats girl bot
+
 just a small bot meant for friends
 
 because they are stupid
@@ -7,20 +8,30 @@ and don't know how to be good at life
 
 all good though
 
-## uses
+## current uses
+
 - discord.js
 - node.js
 - sqlite3
 
-## a true upgrade from banobot
-- [x] actually works
-- [x] actually organized (sort of)
-- [x] actually good (not really though)
-- [x] actually has and makes use of a database
-- [x] actually has a good command handler
-- [x] actually has a good event handler
+## planned uses
 
-# sad
+- google translate
+- chartjs with quickchart.io
+
+
+
+## a true upgrade from banobot
+
+- actually works
+- actually organized (sort of)
+- actually good (not really though)
+- actually has and makes use of a database
+- actually has a good command handler
+- actually has a good event handler
+
+## sad
+
 typescript sucks
 don't ever use it
 please don't
