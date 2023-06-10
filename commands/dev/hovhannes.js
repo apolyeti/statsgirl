@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+require('dotenv').config({path: '../../.env'})
 const { joinVoiceChannel, createAudioPlayer, VoiceConnectionStatus, createAudioResource } = require('@discordjs/voice');
 
 
@@ -20,6 +21,7 @@ module.exports = {
         connection.on(VoiceConnectionStatus.Ready, () => {
             console.log('The connection has entered the Ready state - ready to play audio!');
         });
+
 
         const player = createAudioPlayer();
         const resource = createAudioResource(process.env.HOVHANNES_PATH);
