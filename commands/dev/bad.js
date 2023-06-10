@@ -51,9 +51,7 @@ module.exports = {
         // whats the hex color for green
             .setColor('#d62d4f')
             .setTitle('bad :(')
-            .setDescription(`${interaction.user.username} did a bad thing: ${interaction.options.getString('act')} 
-            points lost: ${interaction.options.getInteger('points')}
-            you now have ${userPoints.get(interaction.user.id).points} points`)
+            .setDescription(`${interaction.user.username} did a bad thing: ${interaction.options.getString('act')} \npoints lost: ${interaction.options.getInteger('points')}\nyou now have ${userPoints.get(interaction.user.id).points} points`)
             .setImage(interaction.user.avatarURL())
         await interaction.reply({ embeds: [sendEmbed] })
     },

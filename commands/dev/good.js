@@ -57,9 +57,7 @@ module.exports = {
         const sendEmbed = new EmbedBuilder()
             .setColor('#54d171')
             .setTitle('good!')
-            .setDescription(`${interaction.user.username} did a good thing: ${interaction.options.getString('act')} 
-            points deserved: ${interaction.options.getInteger('points')}
-            you now have ${userPoints.get(interaction.user.id).points} points`)
+            .setDescription(`${interaction.user.username} did a good thing: ${interaction.options.getString('act')}\npoints deserved: ${interaction.options.getInteger('points')}\nyou now have ${userPoints.get(interaction.user.id).points} points`)
             .setImage(interaction.user.avatarURL())
         await interaction.reply({ embeds: [sendEmbed] })
     },
