@@ -9,9 +9,8 @@ module.exports = (sequelize, DataTypes) => {
 			defaultValue: 0,
 			allowNull: false,
 		},
-		month: {
-			type: DataTypes.INTEGER,
-			defaultValue: 0,
+		username: {
+			type: DataTypes.STRING,
 			allowNull: false,
 		}
 	}, {

@@ -1,8 +1,17 @@
 const { SlashCommandBuilder, EmbedBuilder, Collection } = require('discord.js');
-const { addPoints } = require('../../util/addPoints.js');
 const userPoints = new Collection();
 const { Users } = require('../../dbObjects.js')
 
+async function addPoints(name, id, points, collection) {
+    const user = collection.get(id);
+    if (user) {
+        user.points += Number(points);
+        return user.save();
+    }
+    const newUser = await Users.create({ user_id: id, points, username: name });
+    collection.set(name, id, newUser);
+    return newUser;
+}
 
 
 
@@ -24,12 +33,13 @@ module.exports = {
     async execute(interaction) {
         const storedPoints = await Users.findAll();
         storedPoints.forEach(p => userPoints.set(p.user_id, p));
-        addPoints(interaction.user.id, interaction.options.getInteger('points'), userPoints)
+        addPoints(interaction.user.username, interaction.user.id, interaction.options.getInteger('points'), userPoints)
         const sendEmbed = new EmbedBuilder()
             .setColor('#54d171')
             .setTitle('good!')
             .setDescription(`${interaction.user.username} did a good thing: ${interaction.options.getString('act')} 
-            points deserved: ${interaction.options.getInteger('points')}`)
+            points deserved: ${interaction.options.getInteger('points')}
+            you now have ${userPoints.get(interaction.user.id).points} points`)
             .setImage(interaction.user.avatarURL())
         // add points to user's balance using sequelize and sqlite
         // const user = await Users.findOne({ where: { user_id: interaction.user.id } });

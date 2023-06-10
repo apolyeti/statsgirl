@@ -16,8 +16,6 @@ module.exports = {
 	once: true,
 	execute(client) {
 		Users.sync();
-		const storedPoints = Users.findAll();
-		storedPoints.forEach(p => client.points.set(p.user_id, p));
 		console.log(`Logged in as ${client.user.tag}`);
 	},
 };
