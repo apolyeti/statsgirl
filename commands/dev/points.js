@@ -4,13 +4,13 @@ const { Users } = require('../../dbObjects.js')
   
 
 // helper function for fetching points
-async function getPoints(id, collection) {
+async function getPoints(name, id, collection) {
     const user = collection.get(id);
     if (user) {
         return user.points;
     }
-    const newUser = await Users.create({ user_id: id, points: 0 });
-    collection.set(id, newUser);
+    const newUser = await Users.create({username: name, user_id: id, points: 0 });
+    collection.set(name, id, newUser);
     return newUser.points;
 }
 
@@ -30,10 +30,10 @@ module.exports = {
         const storedPoints = await Users.findAll();
         // throw everything into collection
         storedPoints.forEach(p => userPoints.set(p.user_id, p));
-        let points = await getPoints(interaction.user.id, userPoints)
+        let points = await getPoints(interaction.user.username, interaction.user.id, userPoints)
         const sendEmbed = new EmbedBuilder()
             .setColor('#77d5e6')
-            .setTitle('points')
+            .setTitle(`${interaction.user.username}`)
             .setDescription(`you have ${points} points`)
             .setImage(interaction.user.avatarURL())
         await interaction.reply({ embeds: [sendEmbed] })

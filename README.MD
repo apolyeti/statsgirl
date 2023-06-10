@@ -27,6 +27,12 @@ please don't
 i'm begging you
 i'm totally not coping with the fact that i'm too stupid to use it
 
+![Alt text](https://cdn.discordapp.com/attachments/1117167685827051680/1117176911681048716/image.png)
+
+![Alt text](https://cdn.discordapp.com/attachments/1117167685827051680/1117177059924508773/image.png)
+
+![Alt text](https://cdn.discordapp.com/attachments/1117167685827051680/1117177428889059398/image.png)
+
 
 
 
