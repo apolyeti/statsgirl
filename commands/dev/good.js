@@ -5,6 +5,9 @@ const { Users } = require('../../dbObjects.js')
 
 // helper function for adding points
 async function addPoints(name, id, points, collection) {
+    if (points < 0) {
+        return 'negative';
+    }
     if (points > 30) {
         return 'null';
     }
@@ -45,6 +48,10 @@ module.exports = {
         let test = await addPoints(interaction.user.username, interaction.user.id, interaction.options.getInteger('points'), userPoints)
         if (test == 'null') {
             await interaction.reply({ephemeral: true, content: "you can't give yourself more than 30 points"})
+            return;
+        }
+        if (test == 'negative') {
+            await interaction.reply({ephemeral: true, content: "you can't give yourself negative points"})
             return;
         }
         const sendEmbed = new EmbedBuilder()

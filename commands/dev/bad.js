@@ -4,6 +4,9 @@ const userPoints = new Collection();
 
 
 async function subPoints(name, id, points, collection) {
+    if (points < 0) {
+        return 'negative';
+    }
     if (points > 30) {
         return 'null';
     }
@@ -38,6 +41,10 @@ module.exports = {
         let test = await subPoints(interaction.user.username, interaction.user.id, interaction.options.getInteger('points'), userPoints);
         if (test == 'null') {
             await interaction.reply({ephemeral: true, content: "you can't take away more than 30 points, i know you're a bad person but come on"})
+            return;
+        }
+        if (test == 'negative') {
+            await interaction.reply({ephemeral: true, content: "nice try, but i planned for that :)"})
             return;
         }
         const sendEmbed = new EmbedBuilder()
