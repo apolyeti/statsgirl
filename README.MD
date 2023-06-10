@@ -1,12 +1,17 @@
 # stats girl bot
 
-just a small bot meant for friends
+a very small discord bot made for my friends that simply adds and removes points from users, incentivizing good behavior and punishing bad behavior in my friend group
 
-because they are stupid
+also has a few other commands that are just for fun
 
-and don't know how to be good at life
+## commands
 
-all good though
+- /good
+- /bad
+- /points
+- /lb
+- /hovhannes
+- /reset (soon will only be allowed with admin perms)
 
 ## current uses
 
