@@ -4,6 +4,9 @@ const userPoints = new Collection();
 
 
 async function subPoints(name, id, points, collection) {
+    if (points > 30) {
+        return 'null';
+    }
     const user = collection.get(id);
     if (user) {
         user.points -= Number(points);
@@ -32,7 +35,11 @@ module.exports = {
     async execute(interaction) {
         const storedPoints = await Users.findAll();
         storedPoints.forEach(p => userPoints.set(p.user_id, p));
-        subPoints(interaction.user.username, interaction.user.id, interaction.options.getInteger('points'), userPoints)
+        let test = await subPoints(interaction.user.username, interaction.user.id, interaction.options.getInteger('points'), userPoints);
+        if (test == 'null') {
+            await interaction.reply({ephemeral: true, content: "you can't take away more than 30 points, i know you're a bad person but come on"})
+            return;
+        }
         const sendEmbed = new EmbedBuilder()
         // whats the hex color for green
             .setColor('#d62d4f')

@@ -7,6 +7,10 @@ module.exports = {
         .setName('hovhannes')
         .setDescription('you should definitely use this command'),
     async execute(interaction) {
+        if (!interaction.member.voice.channel) {
+            await interaction.reply({ content: 'hop on vc first', ephemeral: true })
+            return;
+        }
         const connection = joinVoiceChannel({
             channelId: interaction.member.voice.channel.id,
             guildId: interaction.guild.id,

@@ -1,8 +1,14 @@
 const { SlashCommandBuilder, EmbedBuilder, Collection } = require('discord.js');
 const userPoints = new Collection();
 const { Users } = require('../../dbObjects.js')
+  
 
+// helper function for adding points
 async function addPoints(name, id, points, collection) {
+    if (points > 30) {
+        return 'null';
+    }
+    // perform function
     const user = collection.get(id);
     if (user) {
         user.points += Number(points);
@@ -18,6 +24,7 @@ async function addPoints(name, id, points, collection) {
 
 
 module.exports = {
+    // make the command
     data: new SlashCommandBuilder()
         .setName('good')
         .setDescription("for all the good things you've done as a person")
@@ -29,11 +36,17 @@ module.exports = {
             option.setName('points')
                 .setDescription('how many points you think you deserve for being better')
                 .setRequired(true)),
-        
+    // execute the command
     async execute(interaction) {
+        // grab everything from db
         const storedPoints = await Users.findAll();
+        // throw everything into collection
         storedPoints.forEach(p => userPoints.set(p.user_id, p));
-        addPoints(interaction.user.username, interaction.user.id, interaction.options.getInteger('points'), userPoints)
+        let test = await addPoints(interaction.user.username, interaction.user.id, interaction.options.getInteger('points'), userPoints)
+        if (test == 'null') {
+            await interaction.reply({ephemeral: true, content: "you can't give yourself more than 30 points"})
+            return;
+        }
         const sendEmbed = new EmbedBuilder()
             .setColor('#54d171')
             .setTitle('good!')
@@ -41,13 +54,6 @@ module.exports = {
             points deserved: ${interaction.options.getInteger('points')}
             you now have ${userPoints.get(interaction.user.id).points} points`)
             .setImage(interaction.user.avatarURL())
-        // add points to user's balance using sequelize and sqlite
-        // const user = await Users.findOne({ where: { user_id: interaction.user.id } });
-        // if (user) {
-        //     user.points += interaction.options.getInteger('points');
-        //     await user.save();
-        //     return interaction.reply({ content: `You now have ${user.points} points.` });
-        // }
         await interaction.reply({ embeds: [sendEmbed] })
     },
 };

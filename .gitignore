@@ -3,3 +3,4 @@ node_modules
 deploy-commands.js
 deploy-global.js
 database.sqlite
+service-key.json

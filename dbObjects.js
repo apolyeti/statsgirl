@@ -9,4 +9,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 
 const Users = require('./models/Users.js')(sequelize, Sequelize.DataTypes);
 
+
+
+
 module.exports = { Users };
