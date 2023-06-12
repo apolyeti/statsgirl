@@ -9,6 +9,10 @@ module.exports = {
         .setDescription("lists all the people"),
         
     async execute(interaction) {
+        // ranks people by points from highest to lowest
+        // const storedPoints = await Users.findAll((
+        //     { order: [ ['points', 'DESC'] ] }
+        // ));
         const storedPoints = await Users.findAll((
             { order: [ ['points', 'DESC'] ] }
         ));
@@ -21,6 +25,7 @@ module.exports = {
             .setColor('#77d5e6')
             .setTitle('leaderboard')
             .setDescription(lb)
+        userPoints.clear();
         await interaction.reply({ embeds: [sendEmbed] })
     },
 };

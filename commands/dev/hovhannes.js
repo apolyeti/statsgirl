@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 require('dotenv').config({path: '../../.env'})
-const { joinVoiceChannel, createAudioPlayer, VoiceConnectionStatus, createAudioResource } = require('@discordjs/voice');
+const { joinVoiceChannel, createAudioPlayer, VoiceConnectionStatus, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
 
 
 module.exports = {
@@ -27,6 +27,11 @@ module.exports = {
         const resource = createAudioResource(process.env.HOVHANNES_PATH);
 
         player.play(resource);
+        player.on(AudioPlayerStatus.Idle, () => {
+            console.log('going to disconnect now')
+            player.stop();
+            connection.destroy();
+        });
         connection.subscribe(player);
         await interaction.reply({ content: 'you wont regret it thanks', ephemeral: true })
     }   
