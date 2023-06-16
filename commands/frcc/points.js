@@ -31,10 +31,12 @@ module.exports = {
         // throw everything into collection
         storedPoints.forEach(p => userPoints.set(p.user_id, p));
         let points = await getPoints(interaction.user.username, interaction.user.id, userPoints)
+        let desc = points != 1 ? `you have ${points} points` : `you have ${points} point`
+        // make it so if the user has 1 point, only say point, not points
         const sendEmbed = new EmbedBuilder()
             .setColor('#77d5e6')
             .setTitle(`${interaction.user.username}`)
-            .setDescription(`you have ${points} points`)
+            .setDescription(desc) 
             .setImage(interaction.user.avatarURL())
         await interaction.reply({ embeds: [sendEmbed] })
     },
