@@ -19,10 +19,11 @@ also has a few other commands that are just for fun
 - node.js
 - sqlite3
 - axios (for monkeytype api)
+- deepl translate api
 
 ## planned uses
 
-- deepl translate
+- ~~deepl translate~~
 - chartjs with quickchart.io
 
 
