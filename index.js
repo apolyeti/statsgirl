@@ -14,17 +14,12 @@ const client = new Client({ intents: [
     GatewayIntentBits.GuildPresences,
 ]});
 
-
-
-
-
-
-
 // load command files
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 for (const folder of commandFolders) {
+	// handle .DS_Store files (macOS)
 	if (folder == '.DS_Store') continue;
     const commandsPath = path.join(foldersPath, folder);
 	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -40,11 +35,12 @@ for (const folder of commandFolders) {
 	}
 }
 
-
+// load event files
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
+	// handle .DS_Store files (macOS)
 	if (file == '.DS_Store') continue;
 	const filePath = path.join(eventsPath, file);
 	const event = require(filePath);
