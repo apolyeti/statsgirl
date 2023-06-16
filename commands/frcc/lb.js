@@ -18,8 +18,16 @@ module.exports = {
         ));
         storedPoints.forEach(p => userPoints.set(p.user_id, p));
         let lb = '';
+        const guild = interaction.guild;
+        let rank = 1;
         for (let i = 0; i < userPoints.size; i++) {
-            lb += `${i + 1}. ${userPoints.at(i).username}: ${userPoints.at(i).points}\n`
+            let user = guild.members.cache.get(userPoints.at(i).user_id);
+            if (!user) {
+                continue;
+            } else {
+                lb += `${rank}. ${userPoints.at(i).username}: ${userPoints.at(i).points}\n`;
+                rank++;
+            }
         }
         const sendEmbed = new EmbedBuilder()
             .setColor('#77d5e6')
