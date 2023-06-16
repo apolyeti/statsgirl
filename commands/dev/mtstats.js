@@ -4,7 +4,12 @@ const axios = require('axios');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('mtstats')
-		.setDescription('monkeytype stats'),
+		.setDescription('monkeytype stats')
+		.addStringOption(option =>
+            option.setName('user')
+                .setDescription('username of the user you want to see stats for')
+                .setRequired(true)),
+
 	async execute(interaction) {
 		try {
 			const response = await axios.get('https://api.monkeytype.com/users/apol/profile', {
@@ -13,10 +18,9 @@ module.exports = {
 				},
 			});
 			const statsData = response.data;
-			console.log(statsData)
 
 			const sendEmbed = new EmbedBuilder()
-				.setColor('#77d5e6')
+				.setColor('#f5d362')
 				.setTitle(`MonkeyType Stats for ${statsData.data.name}`)
 				.setDescription(statsData.data.typingStats.startedTests + ' tests started')
 
