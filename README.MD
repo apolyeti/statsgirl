@@ -18,10 +18,11 @@ also has a few other commands that are just for fun
 - discord.js
 - node.js
 - sqlite3
+- axios (for monkeytype api)
 
 ## planned uses
 
-- google translate
+- deepl translate
 - chartjs with quickchart.io
 
 
