@@ -1,6 +1,6 @@
 const { Events } = require('discord.js');
 const cld = require('cld');
-const axios = require('axios');
+const axios = require('../util/deeplconfig');
 
 
 
@@ -10,16 +10,28 @@ module.exports = {
         if (message.author.bot) return;
         console.log(message.content);
         let messageLanguage;
-        cld.detect(message.content).then((result) => {
-            messageLanguage = (result.languages[0].code);
-        })
-        // so the program doesnt crash for not knowing the language
-        .catch((err) => {
+        try {
+            const result = await cld.detect(message.content);
+            messageLanguage = result.languages[0].code;
+        } catch (err) {
             console.log(err);
-        });
+        }
+        // so the program doesnt crash for not knowing the language
+ 
 
         if (messageLanguage == 'ja') {
+            const data = new URLSearchParams();
+            data.append('text', message.content);
+            data.append('target_lang', 'EN');
 
+            axios.post('/translate', data)
+                .then((response) => {
+                    message.reply(response.data.translations[0].text);
+                })
+                .catch((error) => {
+                    console.log(error);
+                }
+            );
         }
     }
 }
