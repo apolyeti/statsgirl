@@ -59,6 +59,7 @@ module.exports = {
             .setTitle('good!')
             .setDescription(`${interaction.user.username} did a good thing: ${interaction.options.getString('act')}\npoints deserved: ${interaction.options.getInteger('points')}\nyou now have ${userPoints.get(interaction.user.id).points} points`)
             .setImage(interaction.user.avatarURL())
+        userPoints.clear();
         await interaction.reply({ embeds: [sendEmbed] })
     },
 };

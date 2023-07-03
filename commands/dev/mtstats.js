@@ -20,6 +20,7 @@ module.exports = {
 			});
 
 			const statsData = response.data;
+			console.log(statsData.personalBests)
 			const sendEmbed = {
 				color: 0xf5d362,
 				title: 'MonkeyType Stats for ' + statsData.data.name,
