@@ -10,7 +10,7 @@ also has a few other commands that are just for fun
 - /bad
 - /points
 - /lb
-- /hovhannes
+- /hovhannes (voice command)
 - /reset (soon will only be allowed with admin perms)
 
 ## current uses
