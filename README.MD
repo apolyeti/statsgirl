@@ -21,6 +21,8 @@ also has a few other commands that are just for fun
 - axios (api fetching)
 - deepl translate api
 - monkeytype api
+- ocr api
+- nodemon (dev dependency)
 
 ## planned uses
 
