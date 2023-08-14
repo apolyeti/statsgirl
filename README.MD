@@ -37,9 +37,6 @@ also has a few other commands that are just for fun
 
 ![Alt text](https://cdn.discordapp.com/attachments/1117167685827051680/1117177428889059398/image.png)
 
-
-
-
 ```bash
 rm -rf statsgirl
 ```
