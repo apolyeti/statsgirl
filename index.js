@@ -13,6 +13,7 @@ const client = new Client({ intents: [
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildPresences,
 	GatewayIntentBits.MessageContent,
+	GatewayIntentBits.DirectMessages,
 ]});
 
 // load command files
