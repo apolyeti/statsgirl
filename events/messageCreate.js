@@ -1,6 +1,7 @@
 const { Events } = require('discord.js');
 const cld = require('cld');
 const axios = require('../util/deeplconfig');
+const document = require('../util/documentdeepl');
 const ax = require('axios');
 const FormData = require('form-data');
 const ocr_key = process.env.OCR_KEY;
@@ -11,20 +12,25 @@ module.exports = {
     async execute(message) {
         if (message.author.bot) return;
         if (message.channel.type === 'DM') return;
-        console.log('#' + message.channel.name + ' ' + message.author.username + ': ' + message.content);
-        let inChannel = false;
-        message.channel.members.forEach(member => {
-            if (member.id == process.env.APOL) {
-                inChannel = true;
-            }
-        })
-        if (!inChannel) {
-            await message.guild.members.fetch(process.env.APOL).then((user) => {
-                user.createDM().then((dm) => {
-                    dm.send(message.author.username + ' in #' + message.channel.name + ': ' + message.content);
-                })
-            })
+        if (message.content.startsWith('stats girl')) {
+            message.channel.sendTyping();
         }
+        console.log('#' + message.channel.name + ' ' + message.author.username + ': ' + message.content + ' ' + message.createdAt);
+        // let inChannel = false;
+        // message.channel.members.forEach(member => {
+        //     if (member.id == process.env.APOL) {
+        //         inChannel = true;
+        //     }
+        // })
+        // if (!inChannel) {
+        //     console.log('member not found');
+        //     await message.guild.members.fetch(process.env.APOL).then((user) => {
+        //         user.createDM().then((dm) => {
+        //             dm.send(message.author.username + ' in #' + message.channel.name + ': ' + message.content + ' ' + message.createdAt);
+        //         })
+        //     })
+        // }
+
 
 
         if (message.content.startsWith('<@1095069321631387838>')) {
@@ -59,7 +65,7 @@ module.exports = {
                         axios.post('/translate', data)
                             .then((response) => {
                                 if (response.data.translations[0].text.length < 5) return;
-                                message.channel.send(`Original: ${original}\nTranslated: ${response.data.translations[0].text}`);
+                                message.reply(`Original: ${original}\nTranslated: ${response.data.translations[0].text}`);
                             })
                             .catch((error) => {
                                 console.log(error);
@@ -72,18 +78,40 @@ module.exports = {
             }
         }
 
+        // if (message.attachments) {
+        //     const file = message.attachments.first();
+        //     if (file.contentType == 'application/pdf') {
+        //         console.log('pdf found, sent by ' + message.author.username + ' in #' + message.channel.name);
+        //         const data = new URLSearchParams();
+        //         data.append('file', file.url);
+        //         data.append('target_lang', 'EN');
+        //         document.post('/document', data)
+        //             .then((response) => {
+        //                 message.reply(response.data.translations[0].text);
+        //             })
+        //             .catch((error) => {
+        //                 console.log(error);
+        //             }
+        //         );
+        //     }
+        // }
+
+
 
         let messageLanguage;
-        try {
-            const result = await cld.detect(message.content);
-            messageLanguage = result.languages[0].code;
-        } catch (err) {
-            console.log('message too short')
+        if (message.content.length > 5) {
+            try {
+                const result = await cld.detect(message.content);
+                messageLanguage = result.languages[0].code;
+            } catch (err) {
+                console.log('message too short')
+            }
         }
+
         // so the program doesnt crash for not knowing the language
  
 
-        if (messageLanguage == 'ja') {
+        if (messageLanguage == 'ja' || messageLanguage == 'de') {
             const data = new URLSearchParams();
             data.append('text', message.content);
             data.append('target_lang', 'EN');
