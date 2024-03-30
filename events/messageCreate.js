@@ -33,13 +33,58 @@ module.exports = {
 
 
 
-        if (message.content.startsWith('<@1095069321631387838>')) {
+        if (message.content.startsWith('<@1095069321631387838> ja')) {
             if (message.attachments) {
                 console.log('attachment found, sent by ' + message.author.username + ' in #' + message.channel.name);
                 message.attachments.forEach(attachment => {
                     console.log(attachment.url);
                     let data = new FormData();
                     data.append('language', 'jpn');
+                    data.append('isOverlayRequired', 'false');
+                    data.append('url', attachment.url);
+                    data.append('iscreatesearchablepdf', 'false');
+                    data.append('issearchablepdfhidetextlayer', 'false');
+    
+                    const config = {
+                        method: 'post',
+                        maxBodyLength: Infinity,
+                        url: 'https://api.ocr.space/parse/image',
+                        headers: { 
+                          'apikey': ocr_key, 
+                          ...data.getHeaders()
+                        },
+                        data : data
+                    };
+                    ax(config)
+                    .then(function (response) {
+                        const original = response.data.ParsedResults[0].ParsedText;
+                        if (original.length < 5) return;
+                        const data = new URLSearchParams();
+                        data.append('text', original);
+                        data.append('target_lang', 'EN');
+                        axios.post('/translate', data)
+                            .then((response) => {
+                                if (response.data.translations[0].text.length < 5) return;
+                                message.reply(`Original: ${original}\nTranslated: ${response.data.translations[0].text}`);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                })
+            }
+        }
+
+        if (message.content.startsWith('<@1095069321631387838> de')) {
+            if (message.attachments) {
+                console.log('attachment found, sent by ' + message.author.username + ' in #' + message.channel.name);
+                message.attachments.forEach(attachment => {
+                    console.log(attachment.url);
+                    let data = new FormData();
+                    data.append('language', 'ger');
                     data.append('isOverlayRequired', 'false');
                     data.append('url', attachment.url);
                     data.append('iscreatesearchablepdf', 'false');
@@ -111,7 +156,8 @@ module.exports = {
         // so the program doesnt crash for not knowing the language
  
 
-        if (messageLanguage == 'ja' || messageLanguage == 'de') {
+        if (messageLanguage == 'ja' || messageLanguage == 'de' || messageLanguage == 'ch') {
+            console.log(messageLanguage);
             const data = new URLSearchParams();
             data.append('text', message.content);
             data.append('target_lang', 'EN');
